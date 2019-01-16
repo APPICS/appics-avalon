@@ -601,11 +601,21 @@ transaction = {
                     }}, {
                         upsert: true
                     }).then(function(){
-                        eco.curation(tx.data.author, tx.data.link, function(distributed) {
+                        // need code split reward
+
+                        // author rewards
+                        eco.distribute(tx.data.author, tx.data.vt, ts, function(distributed) {
                             if (!tx.data.pa && !tx.data.pp)
                                 http.updateRankings(tx.data.author, tx.data.link, vote, distributed)
                             cb(true, distributed)
                         })
+
+                        // curation rewards
+                        // eco.curation(tx.data.author, tx.data.link, function(distributed) {
+                        //     if (!tx.data.pa && !tx.data.pp)
+                        //         http.updateRankings(tx.data.author, tx.data.link, vote, distributed)
+                        //     cb(true, distributed)
+                        // })
                     })
                     break;
     

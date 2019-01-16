@@ -44,7 +44,7 @@ chain = {
             "0",
             0,
             [],
-            "master",
+            "appics",
             null,
             null,
             null,

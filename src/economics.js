@@ -179,17 +179,17 @@ var eco = {
 
                 if (newCoins > 0) {
                     // option 1: instant payments
-                    var newBalance = account.balance + newCoins
-                    changes.balance = newBalance
+                    // var newBalance = account.balance + newCoins
+                    // changes.balance = newBalance
 
                     // option 2: payment reservoir where its possible to 'take away' rewards unlike option 1
                     // useful for models where downvotes should punish past upvoters
-                    // var newPr = new DecayInt(account.pr, {halflife:1000*60*60*24}).decay(ts)
-                    // var newBalance = account.balance + account.pr.v - newPr.v
-                    // newPr.v += newCoins
-                    // if (newPr.v < 0) newPr.v = 0
-                    // changes.balance = newBalance
-                    // changes.pr = newPr
+                    var newPr = new DecayInt(account.pr, {halflife:1000*60*60*24}).decay(ts)
+                    var newBalance = account.balance + account.pr.v - newPr.v
+                    newPr.v += newCoins
+                    if (newPr.v < 0) newPr.v = 0
+                    changes.balance = newBalance
+                    changes.pr = newPr
                 }
                 
                 db.collection('accounts').updateOne({name: name}, {

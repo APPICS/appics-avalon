@@ -5,7 +5,10 @@ mongo = require('./mongo.js')
 chain = require('./chain.js')
 transaction = require('./transaction.js')
 
-originHash = "0000000000000000000000000000000000000000000000000000000000000017"
+// Suggested prefixing:
+// 1st char: 0 = testnet, 1= production
+// 2nd char: network id. 0= generic avalon, D= dtube, A= appics
+originHash = "0A00000000000000000000000000000000000000000000000000000000000000"
 
 // init the database and load most recent blocks in memory directly
 mongo.init(function() {
